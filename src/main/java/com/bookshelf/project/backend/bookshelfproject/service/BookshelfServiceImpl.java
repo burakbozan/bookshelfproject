@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Transactional
@@ -40,8 +41,13 @@ public class BookshelfServiceImpl implements BookshelfService{
 
     @Override
     public ResponseEntity<Bookshelf> getBookById(Integer id) {
-        //TODO
-        return null;
+        Optional<Bookshelf> bookshelfOptional = bookshelfRepo.findById(id);
+
+        if(bookshelfOptional.isPresent()){
+            return new ResponseEntity<>(bookshelfOptional.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @Override

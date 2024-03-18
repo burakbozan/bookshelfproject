@@ -22,4 +22,10 @@ public class BookshelfController {
     public ResponseEntity<List<Bookshelf>> getAllBooks(@RequestParam(required = false) String firstName){
         return bookshelfService.getAllBooks(firstName);
     }
+
+    @GetMapping("/books/{id}")
+    public ResponseEntity<Bookshelf> getBookById(@PathVariable("id") Integer id){
+        return bookshelfService.getBookById(id);
+    }
+
 }
