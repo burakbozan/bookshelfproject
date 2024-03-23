@@ -52,8 +52,12 @@ public class BookshelfServiceImpl implements BookshelfService{
 
     @Override
     public ResponseEntity<Bookshelf> createBook(Bookshelf bookshelf) {
-        //TODO
-        return null;
+        try {
+            Bookshelf books = bookshelfRepo.save(new Bookshelf(bookshelf.getFirstName(), bookshelf.getLastName(), false));
+            return new ResponseEntity<>(books, HttpStatus.CREATED);
+        }catch (Exception e){
+            return  new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override

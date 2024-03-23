@@ -28,4 +28,9 @@ public class BookshelfController {
         return bookshelfService.getBookById(id);
     }
 
+    @PostMapping("/bookshelf")
+    public ResponseEntity<Bookshelf> createBook(@RequestBody Bookshelf bookshelf){
+        return bookshelfService.createBook(bookshelf);
+    }
+
 }
