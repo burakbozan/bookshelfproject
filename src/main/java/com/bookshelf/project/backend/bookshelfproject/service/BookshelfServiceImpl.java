@@ -78,19 +78,25 @@ public class BookshelfServiceImpl implements BookshelfService{
 
     @Override
     public ResponseEntity<HttpStatus> deleteBook(Integer id) {
-        //TODO
+        /*
+        TODO
+         */
         return null;
     }
 
     @Override
     public ResponseEntity<HttpStatus> deleteAllBooks() {
-        //TODO
+        /*
+        TODO
+         */
         return null;
     }
 
     @Override
     public ResponseEntity<List<Bookshelf>> findByConfirmed() {
-        //TODO
+        /*
+        TODO
+         */
         return null;
     }
 }
