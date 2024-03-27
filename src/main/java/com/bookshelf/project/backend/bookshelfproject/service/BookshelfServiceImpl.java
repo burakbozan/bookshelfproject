@@ -62,8 +62,18 @@ public class BookshelfServiceImpl implements BookshelfService{
 
     @Override
     public ResponseEntity<Bookshelf> updateBook(Integer id, Bookshelf bookshelf) {
-        //TODO
-        return null;
+        Optional<Bookshelf> bookshelfOptional = bookshelfRepo.findById(id);
+
+        if(bookshelfOptional.isPresent()){
+            Bookshelf bookshelfObj =bookshelfOptional.get();
+            bookshelfObj.setFirstName(bookshelf.getFirstName());
+            bookshelfObj.setLastName(bookshelf.getLastName());
+            bookshelfObj.setConfirmed(bookshelf.isConfirmed());
+
+            return new ResponseEntity<>(bookshelfRepo.save(bookshelfObj), HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @Override

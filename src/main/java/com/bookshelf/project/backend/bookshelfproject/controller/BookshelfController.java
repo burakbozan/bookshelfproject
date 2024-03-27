@@ -32,5 +32,9 @@ public class BookshelfController {
     public ResponseEntity<Bookshelf> createBook(@RequestBody Bookshelf bookshelf){
         return bookshelfService.createBook(bookshelf);
     }
+    @PutMapping("/bookshelf/{id}")
+    public ResponseEntity<Bookshelf> updateBook(@PathVariable("id") Integer id, @RequestBody Bookshelf bookshelf){
+        return bookshelfService.updateBook(id, bookshelf);
+    }
 
 }
