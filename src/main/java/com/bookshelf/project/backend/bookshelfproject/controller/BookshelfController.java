@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api")
 public class BookshelfController {
 
-    private BookshelfService bookshelfService;
+    private final BookshelfService bookshelfService;
 
     public BookshelfController(BookshelfService bookshelfService) {
         this.bookshelfService = bookshelfService;
@@ -38,13 +38,14 @@ public class BookshelfController {
     public ResponseEntity<Bookshelf> updateBook(@PathVariable("id") Integer id, @RequestBody Bookshelf bookshelf) {
         return bookshelfService.updateBook(id, bookshelf);
     }
+
     @DeleteMapping("/bookshelf/{id}")
-    public ResponseEntity<HttpStatus> deleteBook(@PathVariable("id") Integer id){
+    public ResponseEntity<HttpStatus> deleteBook(@PathVariable("id") Integer id) {
         return bookshelfService.deleteBook(id);
     }
 
     @DeleteMapping("/bookshelf")
-    public ResponseEntity<HttpStatus> deleteAllBooks(){
+    public ResponseEntity<HttpStatus> deleteAllBooks() {
         return bookshelfService.deleteAllBooks();
     }
 

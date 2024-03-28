@@ -11,7 +11,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="bookshelf")
+@Table(name = "bookshelf")
 public class Bookshelf {
 
     @Id
@@ -27,9 +27,9 @@ public class Bookshelf {
     @Column(name = "confirmed")
     private boolean confirmed;
 
-     public Bookshelf(String firstName, String lastName, boolean confirmed){
-         this.firstName = firstName;
-         this.lastName = lastName;
-         this.confirmed = confirmed;
-     }
+    public Bookshelf(String firstName, String lastName, boolean confirmed) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.confirmed = confirmed;
+    }
 }

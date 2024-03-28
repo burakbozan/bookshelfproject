@@ -15,7 +15,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 @Service
-public class BookshelfServiceImpl implements BookshelfService{
+public class BookshelfServiceImpl implements BookshelfService {
 
     private final BookshelfRepo bookshelfRepo;
 
@@ -24,19 +24,17 @@ public class BookshelfServiceImpl implements BookshelfService{
         try {
             List<Bookshelf> bookshelfList = new ArrayList<>();
 
-            if(null == firstName)
-                bookshelfRepo.findAll().forEach(bookshelfList::add);
+            if (null == firstName) bookshelfRepo.findAll().forEach(bookshelfList::add);
             else if (null != firstName && null == lastName)
                 bookshelfRepo.findByFirstNameContaining(firstName).forEach(bookshelfList::add);
-            else
-                bookshelfRepo.findByLastNameContaining(lastName).forEach(bookshelfList::add);
+            else bookshelfRepo.findByLastNameContaining(lastName).forEach(bookshelfList::add);
 
-            if(bookshelfList.isEmpty()){
+            if (bookshelfList.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return  new ResponseEntity<>(bookshelfList, HttpStatus.OK);
-        } catch (Exception e){
+            return new ResponseEntity<>(bookshelfList, HttpStatus.OK);
+        } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -45,7 +43,7 @@ public class BookshelfServiceImpl implements BookshelfService{
     public ResponseEntity<Bookshelf> getBookById(Integer id) {
         Optional<Bookshelf> bookshelfOptional = bookshelfRepo.findById(id);
 
-        if(bookshelfOptional.isPresent()){
+        if (bookshelfOptional.isPresent()) {
             return new ResponseEntity<>(bookshelfOptional.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -57,8 +55,8 @@ public class BookshelfServiceImpl implements BookshelfService{
         try {
             Bookshelf books = bookshelfRepo.save(new Bookshelf(bookshelf.getFirstName(), bookshelf.getLastName(), false));
             return new ResponseEntity<>(books, HttpStatus.CREATED);
-        }catch (Exception e){
-            return  new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -66,14 +64,14 @@ public class BookshelfServiceImpl implements BookshelfService{
     public ResponseEntity<Bookshelf> updateBook(Integer id, Bookshelf bookshelf) {
         Optional<Bookshelf> bookshelfOptional = bookshelfRepo.findById(id);
 
-        if(bookshelfOptional.isPresent()){
-            Bookshelf bookshelfObj =bookshelfOptional.get();
+        if (bookshelfOptional.isPresent()) {
+            Bookshelf bookshelfObj = bookshelfOptional.get();
             bookshelfObj.setFirstName(bookshelf.getFirstName());
             bookshelfObj.setLastName(bookshelf.getLastName());
             bookshelfObj.setConfirmed(bookshelf.isConfirmed());
 
             return new ResponseEntity<>(bookshelfRepo.save(bookshelfObj), HttpStatus.OK);
-        }else{
+        } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
@@ -83,7 +81,7 @@ public class BookshelfServiceImpl implements BookshelfService{
         try {
             bookshelfRepo.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -93,7 +91,7 @@ public class BookshelfServiceImpl implements BookshelfService{
         try {
             bookshelfRepo.deleteAll();
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }catch (Exception e){
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
