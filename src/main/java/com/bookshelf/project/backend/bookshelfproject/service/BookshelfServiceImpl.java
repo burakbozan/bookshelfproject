@@ -98,9 +98,10 @@ public class BookshelfServiceImpl implements BookshelfService {
 
     @Override
     public ResponseEntity<List<Bookshelf>> findByConfirmed() {
-        /*
-        TODO
-         */
-        return null;
+        try {
+
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
