@@ -20,14 +20,16 @@ public class BookshelfServiceImpl implements BookshelfService{
     private final BookshelfRepo bookshelfRepo;
 
     @Override
-    public ResponseEntity<List<Bookshelf>> getAllBooks(String firstName) {
+    public ResponseEntity<List<Bookshelf>> getAllBooks(String firstName, String lastName) {
         try {
             List<Bookshelf> bookshelfList = new ArrayList<>();
 
             if(null == firstName)
                 bookshelfRepo.findAll().forEach(bookshelfList::add);
-            else
+            else if (null != firstName && null == lastName)
                 bookshelfRepo.findByFirstNameContaining(firstName).forEach(bookshelfList::add);
+            else
+                bookshelfRepo.findByLastNameContaining(lastName).forEach(bookshelfList::add);
 
             if(bookshelfList.isEmpty()){
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -78,18 +80,22 @@ public class BookshelfServiceImpl implements BookshelfService{
 
     @Override
     public ResponseEntity<HttpStatus> deleteBook(Integer id) {
-        /*
-        TODO
-         */
-        return null;
+        try {
+            bookshelfRepo.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override
     public ResponseEntity<HttpStatus> deleteAllBooks() {
-        /*
-        TODO
-         */
-        return null;
+        try {
+            bookshelfRepo.deleteAll();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Override

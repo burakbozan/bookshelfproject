@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface BookshelfService {
 
-    ResponseEntity<List<Bookshelf>> getAllBooks(String firstName);
+    ResponseEntity<List<Bookshelf>> getAllBooks(String firstName, String lastName);
 
     ResponseEntity<Bookshelf> getBookById(Integer id);
 
