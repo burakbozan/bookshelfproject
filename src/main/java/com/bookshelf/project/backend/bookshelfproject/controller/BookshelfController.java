@@ -49,4 +49,9 @@ public class BookshelfController {
         return bookshelfService.deleteAllBooks();
     }
 
+    @GetMapping("/bookshelf/confirmed")
+    public ResponseEntity<List<Bookshelf>> findByConfirmed(){
+        return bookshelfService.findByConfirmed();
+    }
+
 }
