@@ -50,7 +50,7 @@ public class BookshelfController {
     }
 
     @GetMapping("/bookshelf/confirmed")
-    public ResponseEntity<List<Bookshelf>> findByConfirmed(){
+    public ResponseEntity<List<Bookshelf>> findByConfirmed() {
         return bookshelfService.findByConfirmed();
     }
 
